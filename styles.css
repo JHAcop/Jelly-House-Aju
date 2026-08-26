@@ -1,0 +1,69 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.background{
+    background-color: #f4ecd9;
+    height: 100vh;
+    width: 100vw;
+    
+    /* Importante: Transforma o body na referência de espaço para o cartão */
+    position: relative; 
+}
+
+#page{
+    background-color: #E6DBC0;
+    width: 180vh;
+    height: 90vh;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50px;
+    position: absolute;
+    padding: 30px;
+    border-radius: 1%;
+}
+
+#logo{
+    position: absolute;
+    left: 40.9%;
+    z-index: 10;
+    top: -49px;
+}
+
+#logo img{
+    width: 30vh;
+    height: auto;
+}
+
+.scroller{
+    height: 50vh;
+    width: 150vh;
+    background-color: #ffff;
+    position: absolute;
+    top: 200px;
+    left: 110px;
+    justify-content: center;
+    display: flex;
+    padding: 200px;
+
+}
+
+#bu1{
+    left: 300px;
+    position: absolute;
+    bottom: 100px;
+}
+
+#bu2{
+    position: absolute;
+    bottom: 100px;
+}
+
+#bu3{
+    right: 300px;
+    position: absolute;
+    bottom: 100px;
+    
+}
