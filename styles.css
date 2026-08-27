@@ -90,12 +90,13 @@
 
     .scroller {
         width: 100%;
-        margin-top: 300px;
+        margin-top: 200px;
         gap: 8px;
+        transform: translateY(150px);
     }
 
     .scroller button {
-        padding: 8px 10px;
-        font-size: 12px;
+        padding: 8px 12px;
+        font-size: 14px;
     }
 }
