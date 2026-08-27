@@ -202,3 +202,27 @@ if (scrollProdutos && produtos.length > 0) {
 
 	produtos[0].classList.add("active");
 }
+/* ========================================
+   TELA DE CARREGAMENTO
+======================================== */
+
+window.addEventListener("load", function() {
+
+	const loadingScreen = document.getElementById("loading-screen");
+
+	if (!loadingScreen) {
+		return;
+	}
+
+	/*
+	 * Pequeno tempo mínimo para o carregamento
+	 * não desaparecer instantaneamente.
+	 */
+
+	setTimeout(function() {
+
+		loadingScreen.classList.add("loading-finalizado");
+
+	}, 1200);
+
+});
