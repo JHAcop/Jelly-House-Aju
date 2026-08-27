@@ -1,216 +1,827 @@
-*{
-	padding:0;
-	margin:0;
-	box-sizing:border-box;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
-.background{
-	background-color:#f4ecd9;
-	width:100vw;
-	min-height:100vh;
-	position:relative;
-	overflow-x:hidden;
+
+/* ========================================
+   FUNDO
+======================================== */
+
+.background {
+	background-color: #f4ecd9;
+
+	width: 100vw;
+	min-height: 100vh;
+
+	position: relative;
+
+	overflow-x: hidden;
 }
 
-#page{
-	background-color:#E6DBC0;
-	width:180vh;
-	height:90vh;
-	left:50%;
-	top:50px;
-	transform:translateX(-50%);
-	position:absolute;
-	padding:30px;
-	border-radius:1%;
+
+/* ========================================
+   PÁGINA
+======================================== */
+
+#page {
+	background-color: #E6DBC0;
+
+	width: 180vh;
+	height: 90vh;
+
+	left: 50%;
+	top: 50px;
+
+	transform: translateX(-50%);
+
+	position: absolute;
+
+	padding: 30px;
+
+	border-radius: 1%;
 }
 
-#logo{
-	position:absolute;
-	left:40.9%;
-	top:-49px;
-	z-index:10;
+
+/* ========================================
+   LOGO
+======================================== */
+
+#logo {
+	position: absolute;
+
+	left: 40.9%;
+	top: -49px;
+
+	z-index: 10;
 }
 
-#logo img{
-	width:30vh;
-	height:auto;
-	display:block;
+
+#logo img {
+	width: 30vh;
+	height: auto;
+
+	display: block;
 }
 
-.produtos-container{
-	width:90%;
-	height:400px;
-	margin:200px auto 0;
-	background-color:#f4ecd9;
-	border-radius:20px;
-	padding:25px;
-	overflow:hidden;
+
+/* ========================================
+   CONTAINER DOS PRODUTOS
+======================================== */
+
+.produtos-container {
+	width: 90%;
+	height: 400px;
+
+	margin: 200px auto 0;
+
+	background-color: #f4ecd9;
+
+	border-radius: 20px;
+
+	padding: 25px;
+
+	overflow: hidden;
 }
 
-.produtos-scroll{
-	width:100%;
-	height:100%;
-	overflow-x:auto;
-	overflow-y:hidden;
-	scrollbar-width:none;
-	-webkit-overflow-scrolling:touch;
+
+/* ========================================
+   SCROLL DOS PRODUTOS
+======================================== */
+
+.produtos-scroll {
+	width: 100%;
+	height: 100%;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+
+	scrollbar-width: none;
+
+	-webkit-overflow-scrolling: touch;
 }
 
-.produtos-scroll::-webkit-scrollbar{
-	display:none;
+
+.produtos-scroll::-webkit-scrollbar {
+	display: none;
 }
 
-.produtos{
-	display:flex;
-	flex-direction:row;
-	justify-content:center;
-	align-items:center;
-	gap:25px;
-	width:100%;
-	height:100%;
+
+/* ========================================
+   PRODUTOS
+======================================== */
+
+.produtos {
+	display: flex;
+
+	flex-direction: row;
+
+	justify-content: center;
+
+	align-items: center;
+
+	gap: 25px;
+
+	width: 100%;
+	height: 100%;
 }
 
-.produto-card{
-	flex:0 0 220px;
-	width:220px;
-	height:300px;
-	background-color:#fffaf0;
-	border-radius:15px;
-	padding:20px;
-	display:flex;
-	flex-direction:column;
-	justify-content:space-between;
-	align-items:center;
+
+/* ========================================
+   ITEM DO PRODUTO
+======================================== */
+
+.produto-item {
+	position: relative;
+
+	flex: 0 0 220px;
+
+	display: flex;
+
+	flex-direction: column;
+
+	align-items: center;
 }
 
-.produto-ilustracao{
-	width:100%;
-	height:210px;
-	display:flex;
-	justify-content:center;
-	align-items:center;
+
+/* ========================================
+   FRUTA SOBRE O CARD
+======================================== */
+
+.fruta-topo {
+	position: absolute;
+
+	width: 95px;
+	height: 95px;
+
+	object-fit: contain;
+
+	left: -15px;
+	top: -35px;
+
+	z-index: 3;
+
+	transform: rotate(-15deg);
 }
 
-.produto-ilustracao img{
-	max-width:100%;
-	max-height:100%;
-	object-fit:contain;
+
+/* ========================================
+   CARD
+======================================== */
+
+.produto-card {
+	flex: 0 0 220px;
+
+	width: 220px;
+	height: 300px;
+
+	background-color: #fffaf0;
+
+	border-radius: 15px;
+
+	padding: 20px;
+
+	display: flex;
+
+	flex-direction: column;
+
+	justify-content: space-between;
+
+	align-items: center;
+
+	transition:
+		transform 0.4s ease,
+		height 0.4s ease,
+		box-shadow 0.4s ease;
 }
 
-.produto-card button{
-	background-color:#2E7D32;
-	color:white;
-	border:none;
-	padding:10px 20px;
-	border-radius:8px;
-	cursor:pointer;
-	font-size:14px;
-	transition:transform 0.4s ease,background-color 0.5s ease;
+
+/* ========================================
+   ILUSTRAÇÃO DO PRODUTO
+======================================== */
+
+.produto-ilustracao {
+	width: 100%;
+	height: 210px;
+
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+
+	overflow: hidden;
+
+	transition: height 0.4s ease;
 }
 
-.produto-card button:hover{
-	background-color:#1a411c;
-	transform:scale(1.2);
+
+.produto-ilustracao img {
+	max-width: 100%;
+	max-height: 100%;
+
+	width: auto;
+	height: auto;
+
+	object-fit: contain;
+
+	display: block;
+
+	transition:
+		transform 0.4s ease,
+		max-height 0.4s ease;
 }
 
-@media(max-width:600px){
-	.background{
-		width:100%;
-		min-height:100vh;
-		height:auto;
-		overflow-x:hidden;
+
+/* ========================================
+   BOTÃO
+======================================== */
+
+.produto-card button {
+	background-color: #2E7D32;
+
+	color: white;
+
+	border: none;
+
+	padding: 10px 20px;
+
+	border-radius: 8px;
+
+	cursor: pointer;
+
+	font-size: 14px;
+
+	flex-shrink: 0;
+
+	transition:
+		transform 0.4s ease,
+		background-color 0.5s ease;
+}
+
+
+.produto-card button:hover {
+	background-color: #1a411c;
+
+	transform: scale(1.2);
+}
+
+
+/* ========================================
+   CARD COM DESCRIÇÃO
+======================================== */
+
+.produto-card.mostrar-descricao {
+
+	height: 380px;
+
+	justify-content: flex-start;
+}
+
+
+/* ========================================
+   IMAGEM COMPACTADA
+======================================== */
+
+.produto-card.mostrar-descricao .produto-ilustracao {
+
+	height: 125px;
+
+	flex-shrink: 0;
+}
+
+
+.produto-card.mostrar-descricao .produto-ilustracao img {
+
+	max-height: 115px;
+
+	transform: scale(0.65);
+}
+
+
+/* ========================================
+   QUADRADO DA DESCRIÇÃO
+======================================== */
+
+.produto-card .descricao {
+
+	width: 100%;
+
+	height: 115px;
+
+	flex-shrink: 0;
+
+	margin-top: 8px;
+
+	padding: 10px;
+
+	background-color: #f4ecd9;
+
+	border: 2px solid #d8c9a8;
+
+	border-radius: 10px;
+
+	font-size: 12px;
+
+	line-height: 1.25;
+
+	color: #3d3528;
+
+	text-align: left;
+
+	overflow-y: auto;
+
+	animation: aparecerDescricao 0.3s ease;
+}
+
+
+/* ========================================
+   LISTA DA DESCRIÇÃO
+======================================== */
+
+.produto-card .descricao ul {
+
+	margin: 0;
+
+	padding-left: 17px;
+}
+
+
+.produto-card .descricao li {
+
+	margin-bottom: 4px;
+}
+
+
+/* ========================================
+   BOTÃO COM DESCRIÇÃO
+======================================== */
+
+.produto-card.mostrar-descricao button {
+
+	margin-top: 10px;
+
+	flex-shrink: 0;
+}
+
+
+/* ========================================
+   ANIMAÇÃO DA DESCRIÇÃO
+======================================== */
+
+@keyframes aparecerDescricao {
+
+	from {
+		opacity: 0;
+		transform: translateY(10px);
 	}
 
-	#page{
-		width:calc(100% - 20px);
-		height:auto;
-		min-height:90vh;
-		left:50%;
-		top:50px;
-		transform:translateX(-50%);
-		padding:20px 0;
-		border-radius:10px;
-		overflow:visible;
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 
-	#logo{
-		left:50%;
-		transform:translateX(-50%);
-		top:-35px;
-		z-index:10;
+}
+
+
+/* ========================================
+   CELULAR
+======================================== */
+
+@media (max-width: 768px) {
+
+	/* ========================================
+	   PÁGINA
+	======================================== */
+
+	.background {
+		width: 100vw;
+		min-height: 100vh;
+
+		overflow-x: hidden;
 	}
 
-	#logo img{
-		width:150px;
-		height:auto;
+
+	#page {
+		width: 100%;
+		height: auto;
+
+		min-height: 100vh;
+
+		position: relative;
+
+		left: 0;
+		top: 0;
+
+		transform: none;
+
+		padding: 30px 0 40px;
+
+		border-radius: 0;
 	}
 
-	.produtos-container{
-		width:90%;
-		height:400px;
-		margin:150px auto 0;
-		padding:15px;
-		background-color:#f4ecd9;
-		border-radius:15px;
-		overflow:hidden;
+
+	/* ========================================
+	   LOGO
+	======================================== */
+
+	#logo {
+		position: relative;
+
+		left: 0;
+		top: 0;
+
+		width: 100%;
+
+		display: flex;
+
+		justify-content: center;
+
+		margin-bottom: 100px;
+
+		z-index: 10;
 	}
 
-	.produtos-scroll{
-		width:100%;
-		height:100%;
-		overflow-x:auto;
-		overflow-y:hidden;
-		scroll-snap-type:x mandatory;
-		-webkit-overflow-scrolling:touch;
-		scrollbar-width:none;
+
+	#logo img {
+		width: 55vw;
+
+		max-width: 240px;
+
+		height: auto;
+
+		display: block;
 	}
 
-	.produtos-scroll::-webkit-scrollbar{
-		display:none;
+
+	/* ========================================
+	   ÁREA DOS PRODUTOS
+	======================================== */
+
+	.produtos-container {
+
+		width: 100%;
+
+		height: 400px;
+
+		margin: 0;
+
+		padding: 0;
+
+		background-color: #f4ecd9;
+
+		border-radius: 0;
+
+		overflow: hidden;
 	}
 
-	.produtos{
-		display:flex;
-		flex-direction:row;
-		justify-content:flex-start;
-		align-items:center;
-		gap:15px;
-		width:max-content;
-		height:100%;
-		padding:10px 20px;
-		margin:0;
+
+	/* ========================================
+	   SCROLL
+	======================================== */
+
+	.produtos-scroll {
+
+		width: 100%;
+
+		height: 100%;
+
+		overflow-x: auto;
+
+		overflow-y: hidden;
+
+		scroll-snap-type: x mandatory;
+
+		scroll-behavior: smooth;
+
+		scrollbar-width: none;
+
+		-webkit-overflow-scrolling: touch;
+
+		overscroll-behavior-x: contain;
 	}
 
-	.produto-card{
-		flex:0 0 250px;
-		width:250px;
-		height:330px;
-		padding:15px;
-		border-radius:15px;
-		scroll-snap-align:center;
+
+	.produtos-scroll::-webkit-scrollbar {
+		display: none;
 	}
 
-	.produto-ilustracao{
-		width:100%;
-		height:240px;
-		display:flex;
-		justify-content:center;
-		align-items:center;
+
+	/* ========================================
+	   CONTAINER DOS PRODUTOS
+	======================================== */
+
+	.produtos {
+
+		display: flex;
+
+		flex-direction: row;
+
+		justify-content: flex-start;
+
+		align-items: center;
+
+		gap: 0;
+
+		width: max-content;
+
+		height: 100%;
+
+		padding: 0;
 	}
 
-	.produto-ilustracao img{
-		max-width:100%;
-		max-height:100%;
-		object-fit:contain;
+
+	/* ========================================
+	   CADA PRODUTO = UMA TELA
+	======================================== */
+
+	.produto-item {
+
+		position: relative;
+
+		flex: 0 0 100vw;
+
+		width: 100vw;
+
+		min-width: 100vw;
+
+		height: 100%;
+
+		display: flex;
+
+		flex-direction: column;
+
+		align-items: center;
+
+		justify-content: center;
+
+		padding: 20px;
+
+		scroll-snap-align: center;
+
+		scroll-snap-stop: always;
+
+		overflow: visible;
 	}
 
-	.produto-card button{
-		padding:8px 12px;
-		font-size:12px;
+
+	/* ========================================
+	   CARD NORMAL
+	======================================== */
+
+	.produto-card {
+
+		width: 220px;
+
+		height: 300px;
+
+		background-color: #fffaf0;
+
+		border-radius: 15px;
+
+		padding: 20px;
+
+		display: flex;
+
+		flex-direction: column;
+
+		justify-content: space-between;
+
+		align-items: center;
+
+		transform: scale(0.92);
+
+		transition:
+			transform 0.35s ease,
+			height 0.35s ease,
+			box-shadow 0.35s ease;
+
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+		z-index: 1;
 	}
 
-	.produto-card button:active{
-		background-color:#1a411c;
-		transform:scale(1.15);
+
+	/* ========================================
+	   CARD CENTRALIZADO
+	======================================== */
+
+	.produto-item.active .produto-card {
+
+		transform: scale(1);
+
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+		z-index: 5;
 	}
+
+
+	/* ========================================
+	   IMAGEM DO PRODUTO
+	======================================== */
+
+	.produto-ilustracao {
+
+		width: 100%;
+
+		height: 210px;
+
+		display: flex;
+
+		justify-content: center;
+
+		align-items: center;
+
+		overflow: hidden;
+
+		flex-shrink: 0;
+	}
+
+
+	.produto-ilustracao img {
+
+		max-width: 100%;
+
+		max-height: 100%;
+
+		width: auto;
+
+		height: auto;
+
+		object-fit: contain;
+
+		display: block;
+
+		transition:
+			transform 0.4s ease,
+			max-height 0.4s ease;
+	}
+
+
+	/* ========================================
+	   FRUTA SOBRE O CARD
+	======================================== */
+
+	.fruta-topo {
+
+		position: absolute;
+
+		width: 85px;
+
+		height: 85px;
+
+		object-fit: contain;
+
+		left: calc(50% - 125px);
+
+		top: 15px;
+
+		z-index: 10;
+
+		transform: rotate(-15deg);
+
+		transition:
+			transform 0.35s ease;
+	}
+
+
+	.produto-item.active .fruta-topo {
+
+		transform: rotate(-15deg) scale(1.08);
+	}
+
+
+	/* ========================================
+	   BOTÃO
+	======================================== */
+
+	.produto-card button {
+
+		background-color: #2E7D32;
+
+		color: white;
+
+		border: none;
+
+		padding: 10px 20px;
+
+		border-radius: 8px;
+
+		cursor: pointer;
+
+		font-size: 14px;
+
+		flex-shrink: 0;
+
+		transition:
+			transform 0.3s ease,
+			background-color 0.3s ease;
+	}
+
+
+	/* ========================================
+	   CARD COM DESCRIÇÃO
+	======================================== */
+
+	.produto-card.mostrar-descricao {
+
+		height: 380px;
+
+		justify-content: flex-start;
+
+		transform: scale(0.96);
+	}
+
+
+	.produto-item.active .produto-card.mostrar-descricao {
+
+		transform: scale(1);
+	}
+
+
+	/* ========================================
+	   IMAGEM COMPACTADA
+	======================================== */
+
+	.produto-card.mostrar-descricao .produto-ilustracao {
+
+		height: 115px;
+
+		flex-shrink: 0;
+	}
+
+
+	.produto-card.mostrar-descricao .produto-ilustracao img {
+
+		max-height: 105px;
+
+		transform: scale(0.65);
+	}
+
+
+	/* ========================================
+	   QUADRADO DA DESCRIÇÃO
+	======================================== */
+
+	.produto-card .descricao {
+
+		width: 100%;
+
+		height: 120px;
+
+		flex-shrink: 0;
+
+		margin-top: 8px;
+
+		padding: 8px;
+
+		background-color: #f4ecd9;
+
+		border: 2px solid #d8c9a8;
+
+		border-radius: 10px;
+
+		font-size: 11px;
+
+		line-height: 1.2;
+
+		color: #3d3528;
+
+		text-align: left;
+
+		overflow-y: auto;
+
+		animation: aparecerDescricao 0.3s ease;
+	}
+
+
+	/* ========================================
+	   LISTA DA DESCRIÇÃO
+	======================================== */
+
+	.produto-card .descricao ul {
+
+		margin: 0;
+
+		padding-left: 16px;
+	}
+
+
+	.produto-card .descricao li {
+
+		margin-bottom: 3px;
+	}
+
+
+	/* ========================================
+	   BOTÃO COM DESCRIÇÃO
+	======================================== */
+
+	.produto-card.mostrar-descricao button {
+
+		margin-top: auto;
+
+		flex-shrink: 0;
+	}
+
 }
