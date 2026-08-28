@@ -1,6 +1,8 @@
 /* =========================================================
-   DESCRIÇÕES DOS PRODUTOS
+   DESCRIÇÕES
 ========================================================= */
+
+const botoes = document.querySelectorAll(".produto-card button");
 
 const descricoes = {
 
@@ -37,27 +39,51 @@ const descricoes = {
 
 
 /* =========================================================
-   ELEMENTOS
-========================================================= */
-
-const botoes = document.querySelectorAll(
-	".produto-card button"
-);
-
-const produtos = document.querySelectorAll(
-	".produto-item"
-);
-
-const scrollProdutos = document.querySelector(
-	".produtos-scroll"
-);
-
-
-/* =========================================================
    TEMPO PARA FECHAR AUTOMATICAMENTE
 ========================================================= */
 
-const TEMPO_FECHAR = 5000;
+const timersDescricao = new WeakMap();
+
+
+function cancelarFechamento(card) {
+
+	const timer = timersDescricao.get(card);
+
+	if (timer) {
+
+		clearTimeout(timer);
+
+		timersDescricao.delete(card);
+
+	}
+
+}
+
+
+function programarFechamento(card, botao) {
+
+	cancelarFechamento(card);
+
+	const timer = setTimeout(function() {
+
+		const descricao = card.querySelector(".descricao");
+
+		if (!descricao) {
+			return;
+		}
+
+		descricao.remove();
+
+		card.classList.remove("mostrar-descricao");
+
+		botao.style.backgroundColor = "#2E7D32";
+
+		timersDescricao.delete(card);
+
+	}, 5000);
+
+	timersDescricao.set(card, timer);
+}
 
 
 /* =========================================================
@@ -79,81 +105,47 @@ function alternarDescricao(botao) {
 		card.querySelector(".descricao");
 
 
-	/* =====================================================
+	/* ==========================================
 	   FECHAR
-	===================================================== */
+	========================================== */
 
 	if (descricaoExistente) {
 
 		descricaoExistente.remove();
 
-		card.classList.remove(
-			"mostrar-descricao"
-		);
+		card.classList.remove("mostrar-descricao");
 
-		botao.style.backgroundColor =
-			"#2E7D32";
+		botao.style.backgroundColor = "#2E7D32";
+
+		cancelarFechamento(card);
 
 		return;
 	}
 
 
-	/* =====================================================
+	/* ==========================================
 	   ABRIR
-	===================================================== */
+	========================================== */
 
 	const descricao =
 		document.createElement("div");
 
 	descricao.className = "descricao";
 
-
-	if (descricoes[sabor]) {
-
-		descricao.innerHTML =
-			descricoes[sabor];
-
-	} else {
-
-		descricao.innerHTML =
-			"<p>Descrição indisponível.</p>";
-
-	}
+	descricao.innerHTML =
+		descricoes[sabor] || "";
 
 
 	card.appendChild(descricao);
 
-	card.classList.add(
-		"mostrar-descricao"
-	);
+	card.classList.add("mostrar-descricao");
 
-	botao.style.backgroundColor =
-		"#1a411c";
+	botao.style.backgroundColor = "#1a411c";
 
 
-	/* =====================================================
-	   FECHAR AUTOMATICAMENTE
-	===================================================== */
+	/* Fecha sozinho depois de alguns segundos */
 
-	setTimeout(function () {
-
-		if (
-			descricao &&
-			descricao.parentNode === card
-		) {
-
-			descricao.remove();
-
-			card.classList.remove(
-				"mostrar-descricao"
-			);
-
-			botao.style.backgroundColor =
-				"#2E7D32";
-		}
-
-	}, TEMPO_FECHAR);
-
+	programarFechamento(card, botao);
 }
 
 
@@ -161,82 +153,62 @@ function alternarDescricao(botao) {
    COMPUTADOR
 ========================================================= */
 
-botoes.forEach(function (botao) {
+botoes.forEach(function(botao) {
 
 	let timerMouse = null;
 
 
-	/* =====================================================
-	   MOUSE ENTROU NO BOTÃO
-	===================================================== */
+	/* ==========================================
+	   MOUSE ENTROU
+	========================================== */
 
-	botao.addEventListener(
-		"mouseenter",
-		function () {
+	botao.addEventListener("mouseenter", function() {
 
-			clearTimeout(timerMouse);
+		clearTimeout(timerMouse);
 
 
-			timerMouse = setTimeout(
-				function () {
+		timerMouse = setTimeout(function() {
 
-					const card =
-						botao.closest(
-							".produto-card"
-						);
+			const card =
+				botao.closest(".produto-card");
 
 
-					if (
-						card &&
-						!card.querySelector(
-							".descricao"
-						)
-					) {
+			if (
+				card &&
+				!card.querySelector(".descricao")
+			) {
 
-						alternarDescricao(
-							botao
-						);
+				alternarDescricao(botao);
 
-					}
+			}
 
-				},
-				700
-			);
+		}, 500);
 
-		}
-	);
+	});
 
 
-	/* =====================================================
+	/* ==========================================
 	   MOUSE SAIU
-	===================================================== */
+	========================================== */
 
-	botao.addEventListener(
-		"mouseleave",
-		function () {
+	botao.addEventListener("mouseleave", function() {
 
-			clearTimeout(timerMouse);
+		clearTimeout(timerMouse);
 
-		}
-	);
+	});
 
 
-	/* =====================================================
+	/* ==========================================
 	   CLIQUE
-	===================================================== */
+	========================================== */
 
-	botao.addEventListener(
-		"click",
-		function () {
+	botao.addEventListener("click", function() {
 
-			clearTimeout(timerMouse);
+		clearTimeout(timerMouse);
 
-			alternarDescricao(
-				botao
-			);
+		alternarDescricao(botao);
 
-		}
-	);
+	});
 
 });
 
@@ -245,16 +217,38 @@ botoes.forEach(function (botao) {
    CELULAR
 ========================================================= */
 
-botoes.forEach(function (botao) {
+botoes.forEach(function(botao) {
 
-	let toqueInicial = false;
+	let timerTouch = null;
 
+
+	/* ==========================================
+	   TOQUE
+	========================================== */
 
 	botao.addEventListener(
 		"touchstart",
-		function () {
+		function() {
 
-			toqueInicial = true;
+			clearTimeout(timerTouch);
+
+
+			timerTouch = setTimeout(function() {
+
+				const card =
+					botao.closest(".produto-card");
+
+
+				if (
+					card &&
+					!card.querySelector(".descricao")
+				) {
+
+					alternarDescricao(botao);
+
+				}
+
+			}, 500);
 
 		},
 		{
@@ -263,36 +257,26 @@ botoes.forEach(function (botao) {
 	);
 
 
+	/* ==========================================
+	   FIM DO TOQUE
+	========================================== */
+
 	botao.addEventListener(
 		"touchend",
-		function () {
+		function() {
 
-			if (!toqueInicial) {
-				return;
-			}
+			clearTimeout(timerTouch);
 
-			toqueInicial = false;
-
-			alternarDescricao(
-				botao
-			);
-
-		},
-		{
-			passive: true
 		}
 	);
 
 
 	botao.addEventListener(
 		"touchcancel",
-		function () {
+		function() {
 
-			toqueInicial = false;
+			clearTimeout(timerTouch);
 
-		},
-		{
-			passive: true
 		}
 	);
 
@@ -303,6 +287,13 @@ botoes.forEach(function (botao) {
    CARD ATIVO NO CELULAR
 ========================================================= */
 
+const scrollProdutos =
+	document.querySelector(".produtos-scroll");
+
+const produtos =
+	document.querySelectorAll(".produto-item");
+
+
 if (
 	scrollProdutos &&
 	produtos.length > 0
@@ -310,34 +301,25 @@ if (
 
 	const observer =
 		new IntersectionObserver(
-			function (entries) {
 
-				entries.forEach(
-					function (entry) {
+			function(entries) {
 
-						if (
-							entry.isIntersecting
-						) {
+				entries.forEach(function(entry) {
 
-							produtos.forEach(
-								function (produto) {
+					if (entry.isIntersecting) {
 
-									produto.classList.remove(
-										"active"
-									);
+						produtos.forEach(function(produto) {
 
-								}
-							);
+							produto.classList.remove("active");
+
+						});
 
 
-							entry.target.classList.add(
-								"active"
-							);
-
-						}
+						entry.target.classList.add("active");
 
 					}
-				);
+
+				});
 
 			},
 			{
@@ -348,19 +330,53 @@ if (
 		);
 
 
-	produtos.forEach(
-		function (produto) {
+	produtos.forEach(function(produto) {
 
-			observer.observe(
-				produto
+		observer.observe(produto);
+
+	});
+
+
+	produtos[0].classList.add("active");
+
+}
+
+
+/* =========================================================
+   SETA DE SCROLL
+========================================================= */
+
+const setaScroll =
+	document.getElementById("scroll-indicador");
+
+
+if (scrollProdutos && setaScroll) {
+
+	let scrollComecou = false;
+
+
+	scrollProdutos.addEventListener(
+		"scroll",
+		function() {
+
+			if (scrollComecou) {
+				return;
+			}
+
+
+			scrollComecou = true;
+
+
+			/* Esconde a seta */
+
+			setaScroll.classList.add(
+				"esconder-seta"
 			);
 
+		},
+		{
+			passive: true
 		}
-	);
-
-
-	produtos[0].classList.add(
-		"active"
 	);
 
 }
@@ -370,42 +386,25 @@ if (
    TELA DE CARREGAMENTO
 ========================================================= */
 
-window.addEventListener(
-	"load",
-	function () {
+window.addEventListener("load", function() {
 
-		const loadingScreen =
-			document.getElementById(
-				"loading-screen"
-			);
-
-
-		if (!loadingScreen) {
-			return;
-		}
-
-
-		/*
-		 * O CSS já faz o desaparecimento.
-		 * Aqui apenas garantimos que o loading
-		 * não permaneça ativo.
-		 */
-
-		setTimeout(
-			function () {
-
-				loadingScreen.style.opacity =
-					"0";
-
-				loadingScreen.style.visibility =
-					"hidden";
-
-				loadingScreen.style.pointerEvents =
-					"none";
-
-			},
-			2000
+	const loadingScreen =
+		document.getElementById(
+			"loading-screen"
 		);
 
+
+	if (!loadingScreen) {
+		return;
 	}
-);
+
+
+	setTimeout(function() {
+
+		loadingScreen.classList.add(
+			"loading-finalizado"
+		);
+
+	}, 1200);
+
+});
