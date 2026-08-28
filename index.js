@@ -1,6 +1,16 @@
+/* =====================================================
+   BOTÕES DOS PRODUTOS
+===================================================== */
+
 const botoes = document.querySelectorAll(".produto-card button");
 
+
+/* =====================================================
+   DESCRIÇÕES DOS SABORES
+===================================================== */
+
 const descricoes = {
+
 	MORANGO: `
 		<ul>
 			<li>500 g de morangos maduros</li>
@@ -29,12 +39,13 @@ const descricoes = {
 			<li>1 colher de chia</li>
 		</ul>
 	`
+
 };
 
 
-/* =====================================
+/* =====================================================
    ABRIR / FECHAR DESCRIÇÃO
-===================================== */
+===================================================== */
 
 function alternarDescricao(botao) {
 
@@ -44,185 +55,348 @@ function alternarDescricao(botao) {
 		return;
 	}
 
-	const sabor = botao.textContent.trim();
-	const descricaoExistente = card.querySelector(".descricao");
 
-	/* FECHAR */
+	const sabor = botao.textContent.trim();
+
+	const descricaoExistente =
+		card.querySelector(".descricao");
+
+
+	/* =================================================
+	   FECHAR DESCRIÇÃO
+	================================================= */
+
 	if (descricaoExistente) {
 
 		descricaoExistente.remove();
 
-		card.classList.remove("mostrar-descricao");
+		card.classList.remove(
+			"mostrar-descricao"
+		);
 
-		botao.style.backgroundColor = "#2E7D32";
+		botao.style.backgroundColor =
+			"#2E7D32";
+
+		botao.style.transform =
+			"scale(1)";
 
 		return;
 	}
 
 
-	/* ABRIR */
+	/* =================================================
+	   ABRIR DESCRIÇÃO
+	================================================= */
 
-	const descricao = document.createElement("div");
+	const descricao =
+		document.createElement("div");
 
-	descricao.className = "descricao";
 
-	descricao.innerHTML = descricoes[sabor];
+	descricao.className =
+		"descricao";
+
+
+	descricao.innerHTML =
+		descricoes[sabor] || "";
+
 
 	card.appendChild(descricao);
 
-	card.classList.add("mostrar-descricao");
 
-	botao.style.backgroundColor = "#1a411c";
+	card.classList.add(
+		"mostrar-descricao"
+	);
+
+
+	botao.style.backgroundColor =
+		"#1a411c";
+
+	botao.style.transform =
+		"scale(1.1)";
 }
 
 
-/* =====================================
-   COMPUTADOR
-===================================== */
+
+/* =====================================================
+   CONTROLE DOS BOTÕES
+===================================================== */
 
 botoes.forEach(function(botao) {
 
-	let timer = null;
+	let timerMouse = null;
+	let timerTouch = null;
 
 
-	/* Mouse fica sobre o botão */
+	/* =================================================
+	   COMPUTADOR
+	   MOUSE SOBRE O BOTÃO POR 2 SEGUNDOS
+	================================================= */
 
-	botao.addEventListener("mouseenter", function() {
+	botao.addEventListener(
+		"mouseenter",
+		function() {
 
-		timer = setTimeout(function() {
-
-			/* Só abre automaticamente se estiver fechada */
-			const card = botao.closest(".produto-card");
-
-			if (card && !card.querySelector(".descricao")) {
-				alternarDescricao(botao);
-			}
-
-		}, 2000);
-
-	});
+			clearTimeout(timerMouse);
 
 
-	/* Mouse saiu */
+			timerMouse = setTimeout(
+				function() {
 
-	botao.addEventListener("mouseleave", function() {
+					const card =
+						botao.closest(
+							".produto-card"
+						);
 
-		clearTimeout(timer);
 
-	});
+					/*
+					   Só abre automaticamente
+					   se estiver fechado.
+					*/
+
+					if (
+						card &&
+						!card.querySelector(
+							".descricao"
+						)
+					) {
+
+						alternarDescricao(
+							botao
+						);
+
+					}
+
+				},
+				2000
+			);
+
+		}
+	);
 
 
-	/* Clique */
+	/* =================================================
+	   MOUSE SAIU
+	================================================= */
 
-	botao.addEventListener("click", function() {
+	botao.addEventListener(
+		"mouseleave",
+		function() {
 
-		clearTimeout(timer);
+			clearTimeout(timerMouse);
 
-		alternarDescricao(botao);
+			timerMouse = null;
 
-	});
+		}
+	);
+
+
+	/* =================================================
+	   CLIQUE NO COMPUTADOR
+	================================================= */
+
+	botao.addEventListener(
+		"click",
+		function() {
+
+			clearTimeout(timerMouse);
+
+			timerMouse = null;
+
+			alternarDescricao(botao);
+
+		}
+	);
+
+
+	/* =================================================
+	   CELULAR
+	   SEGURAR POR 2 SEGUNDOS
+	================================================= */
+
+	botao.addEventListener(
+		"touchstart",
+		function() {
+
+			clearTimeout(timerTouch);
+
+
+			timerTouch = setTimeout(
+				function() {
+
+					const card =
+						botao.closest(
+							".produto-card"
+						);
+
+
+					if (
+						card &&
+						!card.querySelector(
+							".descricao"
+						)
+					) {
+
+						alternarDescricao(
+							botao
+						);
+
+					}
+
+				},
+				2000
+			);
+
+		},
+		{
+			passive: true
+		}
+	);
+
+
+	/* =================================================
+	   FIM DO TOQUE
+	================================================= */
+
+	botao.addEventListener(
+		"touchend",
+		function() {
+
+			clearTimeout(timerTouch);
+
+			timerTouch = null;
+
+		}
+	);
+
+
+	/* =================================================
+	   TOQUE CANCELADO
+	================================================= */
+
+	botao.addEventListener(
+		"touchcancel",
+		function() {
+
+			clearTimeout(timerTouch);
+
+			timerTouch = null;
+
+		}
+	);
 
 });
 
 
-/* =====================================
-   CELULAR
-===================================== */
 
-botoes.forEach(function(botao) {
-
-	let timer = null;
-
-
-	botao.addEventListener("touchstart", function() {
-
-		timer = setTimeout(function() {
-
-			const card = botao.closest(".produto-card");
-
-			if (card && !card.querySelector(".descricao")) {
-				alternarDescricao(botao);
-			}
-
-		}, 2000);
-
-	});
-
-
-	botao.addEventListener("touchend", function() {
-
-		clearTimeout(timer);
-
-	});
-
-
-	botao.addEventListener("touchcancel", function() {
-
-		clearTimeout(timer);
-
-	});
-
-});
-
-
-/* =====================================
+/* =====================================================
    CARD ATIVO NO CELULAR
-===================================== */
+===================================================== */
 
-const scrollProdutos = document.querySelector(".produtos-scroll");
-const produtos = document.querySelectorAll(".produto-item");
+const scrollProdutos =
+	document.querySelector(
+		".produtos-scroll"
+	);
 
-if (scrollProdutos && produtos.length > 0) {
 
-	const observer = new IntersectionObserver(function(entries) {
+const produtos =
+	document.querySelectorAll(
+		".produto-item"
+	);
 
-		entries.forEach(function(entry) {
 
-			if (entry.isIntersecting) {
+if (
+	scrollProdutos &&
+	produtos.length > 0
+) {
 
-				produtos.forEach(function(produto) {
-					produto.classList.remove("active");
-				});
 
-				entry.target.classList.add("active");
+	/* =================================================
+	   INTERSECTION OBSERVER
+	================================================= */
+
+	if (
+		typeof IntersectionObserver !==
+		"undefined"
+	) {
+
+
+		const observer =
+			new IntersectionObserver(
+
+				function(entries) {
+
+					entries.forEach(
+						function(entry) {
+
+							if (
+								entry.isIntersecting
+							) {
+
+
+								/*
+								   Remove o active
+								   dos outros cards.
+								*/
+
+								produtos.forEach(
+									function(produto) {
+
+										produto.classList.remove(
+											"active"
+										);
+
+									}
+								);
+
+
+								/*
+								   Ativa o card
+								   que está no centro.
+								*/
+
+								entry.target.classList.add(
+									"active"
+								);
+
+							}
+
+						}
+					);
+
+				},
+
+				{
+					root: scrollProdutos,
+
+					threshold: 0.6
+				}
+
+			);
+
+
+		/* =============================================
+		   Observa cada produto
+		============================================= */
+
+		produtos.forEach(
+			function(produto) {
+
+				observer.observe(
+					produto
+				);
+
 			}
+		);
 
-		});
-
-	}, {
-		root: scrollProdutos,
-		threshold: 0.6
-	});
-
-
-	produtos.forEach(function(produto) {
-		observer.observe(produto);
-	});
-
-
-	produtos[0].classList.add("active");
-}
-/* ========================================
-   TELA DE CARREGAMENTO
-======================================== */
-
-window.addEventListener("load", function() {
-
-	const loadingScreen = document.getElementById("loading-screen");
-
-	if (!loadingScreen) {
-		return;
 	}
 
-	/*
-	 * Pequeno tempo mínimo para o carregamento
-	 * não desaparecer instantaneamente.
-	 */
 
-	setTimeout(function() {
+	/* =================================================
+	   PRIMEIRO CARD COMEÇA ATIVO
+	================================================= */
 
-		loadingScreen.classList.add("loading-finalizado");
+	produtos[0].classList.add(
+		"active"
+	);
 
-	}, 1200);
-
-});
+}
