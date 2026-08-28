@@ -408,3 +408,38 @@ window.addEventListener("load", function() {
 	}, 1200);
 
 });
+/* =====================================
+   ESCONDER SETA AO PRIMEIRO SCROLL
+===================================== */
+
+const setaScroll = document.querySelector(".seta-scroll");
+const produtosScroll = document.querySelector(".produtos-scroll");
+
+if (setaScroll && produtosScroll) {
+
+	let setaEscondida = false;
+
+	function esconderSeta() {
+
+		if (setaEscondida) {
+			return;
+		}
+
+		setaEscondida = true;
+
+		setaScroll.classList.add("escondida");
+	}
+
+
+	/* Computador + celular */
+	produtosScroll.addEventListener("scroll", esconderSeta, {
+		passive: true
+	});
+
+
+	/* Também esconde imediatamente ao começar o toque */
+	produtosScroll.addEventListener("touchstart", esconderSeta, {
+		passive: true
+	});
+
+}
