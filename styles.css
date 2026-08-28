@@ -1,7 +1,3 @@
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
 	padding: 0;
 	margin: 0;
@@ -66,18 +62,9 @@ body {
 	opacity: 1;
 	visibility: visible;
 
-	/*
-	   O carregamento desaparece sozinho.
-	   Não depende do JavaScript.
-	*/
-
 	animation: esconder-loading 0.5s ease 1.5s forwards;
 }
 
-
-/* =========================================================
-   ESCONDER LOADING
-========================================================= */
 
 @keyframes esconder-loading {
 
@@ -113,10 +100,6 @@ body {
 }
 
 
-/* =========================================================
-   PAPAGAIO DO LOADING
-========================================================= */
-
 .loading-papagaio {
 	width: 230px;
 	height: 230px;
@@ -128,10 +111,6 @@ body {
 	animation: papagaio-carregando 1.5s ease-in-out infinite;
 }
 
-
-/* =========================================================
-   ANIMAÇÃO DO PAPAGAIO
-========================================================= */
 
 @keyframes papagaio-carregando {
 
@@ -151,7 +130,7 @@ body {
 
 
 /* =========================================================
-   BALÃO DE FALA
+   BALÃO
 ========================================================= */
 
 .loading-balao {
@@ -179,10 +158,6 @@ body {
 }
 
 
-/* =========================================================
-   PONTA DO BALÃO
-========================================================= */
-
 .loading-balao::after {
 	content: "";
 
@@ -202,10 +177,6 @@ body {
 }
 
 
-/* =========================================================
-   RETICÊNCIAS
-========================================================= */
-
 .loading-pontos::after {
 	content: "...";
 
@@ -220,10 +191,6 @@ body {
 	animation: reticencias 1.4s steps(4, end) infinite;
 }
 
-
-/* =========================================================
-   ANIMAÇÃO DAS RETICÊNCIAS
-========================================================= */
 
 @keyframes reticencias {
 
@@ -251,23 +218,30 @@ body {
 
 
 /* =========================================================
-   PÁGINA CENTRAL
+   PÁGINA
 ========================================================= */
 
 #page {
 	background-color: #E6DBC0;
+
 	width: 180vh;
+
 	min-height: 90vh;
+
 	left: 50%;
 	top: 50px;
+
 	transform: translateX(-50%);
+
 	position: relative;
+
 	padding: 30px;
+
 	border-radius: 1%;
 
-	/* importante */
 	overflow: visible;
 }
+
 
 /* =========================================================
    LOGO
@@ -284,11 +258,15 @@ body {
 	z-index: 20;
 }
 
+
 #logo img {
 	width: 220px;
+
 	height: auto;
+
 	display: block;
 }
+
 
 /* =========================================================
    CONTATOS
@@ -308,10 +286,6 @@ body {
 	pointer-events: none;
 }
 
-
-/* =========================================================
-   LINKS DE CONTATO
-========================================================= */
 
 .contato {
 	position: absolute;
@@ -340,8 +314,6 @@ body {
 
 	font-size: 15px;
 
-	/* Fonte mais grossa */
-
 	font-weight: 800;
 
 	box-shadow:
@@ -355,10 +327,6 @@ body {
 }
 
 
-/* =========================================================
-   INSTAGRAM
-========================================================= */
-
 .contato.instagram {
 	left: calc(50% - 200px);
 }
@@ -371,10 +339,6 @@ body {
 }
 
 
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
 .contato.whatsapp {
 	left: calc(50% + 10px);
 }
@@ -386,10 +350,6 @@ body {
 	font-size: 26px;
 }
 
-
-/* =========================================================
-   HOVER DOS CONTATOS
-========================================================= */
 
 .contato:hover {
 	transform: translateY(-3px) scale(1.04);
@@ -405,6 +365,7 @@ body {
 
 .produtos-container {
 	width: 90%;
+
 	max-width: 1130px;
 
 	height: 425px;
@@ -418,12 +379,11 @@ body {
 	padding: 25px;
 
 	overflow: visible;
-	position: relative;
-	z-index: 5;
 }
 
+
 /* =========================================================
-   ÁREA DE SCROLL DOS PRODUTOS
+   SCROLL
 ========================================================= */
 
 .produtos-scroll {
@@ -433,7 +393,7 @@ body {
 
 	overflow-x: auto;
 
-	overflow-y: hidden;
+	overflow-y: visible;
 
 	scrollbar-width: none;
 
@@ -447,7 +407,7 @@ body {
 
 
 /* =========================================================
-   LISTA DE PRODUTOS
+   PRODUTOS
 ========================================================= */
 
 .produtos {
@@ -468,7 +428,7 @@ body {
 
 
 /* =========================================================
-   ITEM DO PRODUTO
+   ITEM
 ========================================================= */
 
 .produto-item {
@@ -481,18 +441,17 @@ body {
 	flex-direction: column;
 
 	align-items: center;
+
+	overflow: visible;
 }
 
 
 /* =========================================================
-   FRUTA NO TOPO DO CARD
+   FRUTA
 ========================================================= */
 
 .fruta-topo {
 	position: absolute;
-
-	z-index: 100;
-	pointer-events: none;
 
 	width: 95px;
 	height: 95px;
@@ -509,7 +468,7 @@ body {
 
 
 /* =========================================================
-   CARD DO PRODUTO
+   CARD
 ========================================================= */
 
 .produto-card {
@@ -527,44 +486,43 @@ body {
 
 	flex-direction: column;
 
-	justify-content: space-between;
+	justify-content: flex-end;
 
 	align-items: center;
 
-	overflow: hidden;
+	overflow: visible;
 
 	transition:
-		height 0.4s ease,
-		min-height 0.4s ease,
 		transform 0.35s ease,
-		opacity 0.35s ease;
+		min-height 0.35s ease;
 }
 
 
 /* =========================================================
-   ILUSTRAÇÃO DO PRODUTO
+   ILUSTRAÇÃO
 ========================================================= */
 
 .produto-ilustracao {
 	width: 100%;
 
-	height: 210px;
+	height: 250px;
 
 	display: flex;
 
 	justify-content: center;
+
 	align-items: center;
 
 	flex-shrink: 0;
 
 	transition:
-		height 0.4s ease,
-		transform 0.4s ease;
+		height 0.45s ease,
+		transform 0.45s ease;
 }
 
 
 /* =========================================================
-   IMAGEM DO POTE
+   IMAGEM DO PRODUTO
 ========================================================= */
 
 .produto-ilustracao img {
@@ -577,13 +535,13 @@ body {
 	display: block;
 
 	transition:
-		transform 0.4s ease,
-		max-height 0.4s ease;
+		transform 0.45s ease,
+		max-height 0.45s ease;
 }
 
 
 /* =========================================================
-   BOTÃO DO PRODUTO
+   BOTÃO
 ========================================================= */
 
 .produto-card button {
@@ -605,18 +563,20 @@ body {
 
 	position: relative;
 
-	z-index: 5;
+	z-index: 20;
+
+	flex-shrink: 0;
 
 	transition:
 		transform 0.4s ease,
-		background-color 0.5s ease;
+		background-color 0.3s ease;
 }
 
 
 .produto-card button:hover {
 	background-color: #1a411c;
 
-	transform: scale(1.15);
+	transform: scale(1.08);
 }
 
 
@@ -625,30 +585,35 @@ body {
 ========================================================= */
 
 .descricao {
-	position: absolute;
-	left: 12px;
-	right: 12px;
-	bottom: 12px;
-	width: auto;
-	max-width: none;
-	margin: 0;
+	position: relative;
+
+	width: 100%;
+
+	max-width: 100%;
+
+	margin-top: 10px;
+
 	padding: 10px;
+
 	font-size: 12px;
+
 	line-height: 1.35;
+
 	color: #3d3528;
+
 	text-align: left;
+
 	background-color: #f4ecd9;
+
 	border-radius: 10px;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	z-index: 20;
-	animation: aparecerDescricao 0.2s ease;
+
+	overflow: visible;
+
+	z-index: 30;
+
+	animation: aparecerDescricao 0.25s ease;
 }
 
-
-/* =========================================================
-   LISTA DA DESCRIÇÃO
-========================================================= */
 
 .descricao ul {
 	padding-left: 18px;
@@ -672,26 +637,41 @@ body {
 ========================================================= */
 
 .produto-card.mostrar-descricao {
-	height: 380px;
-
-	min-height: 380px;
-
 	justify-content: flex-start;
-	overflow: visible;
+
+	transform: translateY(-15px);
 }
 
 
 /* =========================================================
-   IMAGEM COMPACTADA
+   IMAGEM DIMINUI E SOBE
 ========================================================= */
 
 .produto-card.mostrar-descricao .produto-ilustracao {
-	height: 135px;
+	height: 145px;
+
+	transform: translateY(-5px);
 }
 
 
 .produto-card.mostrar-descricao .produto-ilustracao img {
-	max-height: 125px;
+	max-height: 135px;
+
+	transform: scale(0.82);
+}
+
+
+/* =========================================================
+   BOTÃO SOBE JUNTO
+========================================================= */
+
+.produto-card.mostrar-descricao button {
+	transform: translateY(-3px);
+}
+
+
+.produto-card.mostrar-descricao button:hover {
+	transform: translateY(-3px) scale(1.08);
 }
 
 
@@ -704,7 +684,7 @@ body {
 	from {
 		opacity: 0;
 
-		transform: translateY(10px);
+		transform: translateY(8px);
 	}
 
 	to {
@@ -721,11 +701,6 @@ body {
 ========================================================= */
 
 @media (max-width: 768px) {
-
-
-	/* ==========================================
-	   PÁGINA
-	========================================== */
 
 	#page {
 		width: 100vw;
@@ -792,6 +767,7 @@ body {
 		display: flex;
 
 		justify-content: center;
+
 		align-items: center;
 
 		gap: 10px;
@@ -824,7 +800,7 @@ body {
 
 
 	/* ==========================================
-	   CONTAINER DOS PRODUTOS
+	   PRODUTOS
 	========================================== */
 
 	.produtos-container {
@@ -840,7 +816,7 @@ body {
 
 		border-radius: 18px;
 
-		overflow: hidden;
+		overflow: visible;
 	}
 
 
@@ -857,7 +833,7 @@ body {
 
 		overflow-x: auto;
 
-		overflow-y: hidden;
+		overflow-y: visible;
 
 		scroll-snap-type: x mandatory;
 
@@ -917,11 +893,13 @@ body {
 		scroll-snap-align: center;
 
 		position: relative;
+
+		overflow: visible;
 	}
 
 
 	/* ==========================================
-	   CARD NORMAL
+	   CARD
 	========================================== */
 
 	.produto-card {
@@ -931,27 +909,28 @@ body {
 
 		max-width: 360px;
 
-		height: 380px;
+		height: 330px;
 
-		min-height: 380px;
+		min-height: 330px;
 
-		padding: 20px;
+		padding: 15px;
 
 		border-radius: 15px;
+
+		justify-content: flex-end;
 
 		transform: scale(0.92);
 
 		opacity: 0.9;
 
 		transition:
-			transform 0.35s ease,
-			opacity 0.35s ease,
-			height 0.4s ease;
+			transform 0.4s ease,
+			opacity 0.35s ease;
 	}
 
 
 	/* ==========================================
-	   CARD ATIVO NO CENTRO
+	   CARD ATIVO
 	========================================== */
 
 	.produto-item.active .produto-card {
@@ -977,20 +956,19 @@ body {
 		top: -25px;
 
 		transform: rotate(-15deg);
-
-		z-index: 100;
-		pointer-events: none;
 	}
 
 
 	/* ==========================================
-	   ILUSTRAÇÃO
+	   IMAGEM DO PRODUTO
 	========================================== */
 
 	.produto-ilustracao {
 		width: 100%;
 
-		height: 255px;
+		height: 245px;
+
+		flex-shrink: 0;
 	}
 
 
@@ -1002,72 +980,98 @@ body {
 
 
 	/* ==========================================
-	   CARD COM DESCRIÇÃO
+	   BOTÃO
 	========================================== */
 
-	.produto-card.mostrar-descricao {
-		height: 390px;
+	.produto-card button {
+		position: relative;
 
-		min-height: 390px;
+		z-index: 30;
 
-		justify-content: flex-start;
+		font-size: 14px;
+
+		padding: 10px 20px;
+
+		flex-shrink: 0;
+
+		margin-bottom: 5px;
 	}
 
 
 	/* ==========================================
-	   IMAGEM COMPACTADA NO CELULAR
+	   CARD ABERTO
+	========================================== */
+
+	.produto-card.mostrar-descricao {
+		height: auto;
+
+		min-height: 330px;
+
+		transform: scale(1) translateY(-20px);
+
+		justify-content: flex-start;
+
+		z-index: 20;
+	}
+
+
+	/* ==========================================
+	   IMAGEM DIMINUI
 	========================================== */
 
 	.produto-card.mostrar-descricao .produto-ilustracao {
-		height: 135px;
+		height: 125px;
 
-		flex-shrink: 0;
-		transition: height 0.2s ease;
+		transform: translateY(-5px);
 	}
 
 
 	.produto-card.mostrar-descricao .produto-ilustracao img {
-		max-height: 125px;
+		max-height: 115px;
+
+		transform: scale(0.72);
 	}
 
 
 	/* ==========================================
-	   DESCRIÇÃO NO CELULAR
+	   BOTÃO SOBE JUNTO
+	========================================== */
+
+	.produto-card.mostrar-descricao button {
+		transform: translateY(-5px);
+	}
+
+
+	/* ==========================================
+	   DESCRIÇÃO
 	========================================== */
 
 	.descricao {
-		left: 10px;
-		right: 10px;
-		bottom: 10px;
-		width: auto;
-		max-height: none;
-		padding: 9px;
-		font-size: 11px;
-		line-height: 1.3;
+		width: 100%;
+
+		max-width: 100%;
+
+		padding: 10px;
+
+		margin-top: 8px;
+
+		font-size: 12px;
+
+		line-height: 1.35;
+
 		overflow: visible;
+
+		z-index: 50;
 	}
 
 
 	.descricao ul {
-		padding-left: 17px;
+		padding-left: 18px;
 	}
 
 
 	.descricao li {
-		margin-bottom: 4px;
-	}
-
-
-	/* ==========================================
-	   BOTÃO NO CELULAR
-	========================================== */
-
-	.produto-card button {
-		font-size: 13px;
-
-		padding: 9px 18px;
-
-		flex-shrink: 0;
+		margin-bottom: 5px;
 	}
 
 }
@@ -1079,19 +1083,10 @@ body {
 
 @media (max-width: 400px) {
 
-
-	/* ==========================================
-	   LOGO
-	========================================== */
-
 	#logo img {
 		width: 160px;
 	}
 
-
-	/* ==========================================
-	   CONTATOS
-	========================================== */
 
 	.contatos {
 		top: 160px;
@@ -1107,10 +1102,6 @@ body {
 	}
 
 
-	/* ==========================================
-	   PRODUTOS
-	========================================== */
-
 	.produtos-container {
 		margin-top: 145px;
 
@@ -1120,6 +1111,10 @@ body {
 
 	.produto-card {
 		width: calc(100vw - 35px);
+
+		height: 315px;
+
+		min-height: 315px;
 	}
 
 
@@ -1127,6 +1122,23 @@ body {
 		flex-basis: 100vw;
 
 		min-width: 100vw;
+	}
+
+
+	.produto-ilustracao {
+		height: 230px;
+	}
+
+
+	.produto-card.mostrar-descricao .produto-ilustracao {
+		height: 115px;
+	}
+
+
+	.produto-card.mostrar-descricao .produto-ilustracao img {
+		max-height: 105px;
+
+		transform: scale(0.68);
 	}
 
 }
