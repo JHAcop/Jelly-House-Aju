@@ -44,6 +44,13 @@ const descricoes = {
 
 
 /* =========================================================
+   TEMPO PARA FECHAR A DESCRIÇÃO
+========================================================= */
+
+const TEMPO_DESCRICAO = 4000;
+
+
+/* =========================================================
    ABRIR / FECHAR DESCRIÇÃO
 ========================================================= */
 
@@ -63,10 +70,12 @@ function alternarDescricao(botao) {
 
 
 	/* =====================================
-	   FECHAR
+	   SE JÁ ESTÁ ABERTA → FECHA
 	===================================== */
 
 	if (descricaoExistente) {
+
+		clearTimeout(card.timerDescricao);
 
 		descricaoExistente.remove();
 
@@ -86,7 +95,9 @@ function alternarDescricao(botao) {
 
 	descricao.className = "descricao";
 
-	descricao.innerHTML = descricoes[sabor] || "";
+	descricao.innerHTML =
+		descricoes[sabor] || "";
+
 
 	card.appendChild(descricao);
 
@@ -96,25 +107,34 @@ function alternarDescricao(botao) {
 
 
 	/* =====================================
-	   GARANTE QUE A DESCRIÇÃO FIQUE VISÍVEL
+	   FECHAR AUTOMATICAMENTE
 	===================================== */
 
-	requestAnimationFrame(function() {
+	clearTimeout(card.timerDescricao);
 
-		descricao.scrollIntoView({
-			behavior: "smooth",
-			block: "nearest",
-			inline: "nearest"
-		});
 
-	});
+	card.timerDescricao = setTimeout(function() {
+
+		if (descricao && descricao.parentNode) {
+
+			descricao.remove();
+
+			card.classList.remove(
+				"mostrar-descricao"
+			);
+
+			botao.style.backgroundColor =
+				"#2E7D32";
+
+		}
+
+	}, TEMPO_DESCRICAO);
 
 }
 
 
 /* =========================================================
    BOTÕES
-   COMPUTADOR + CELULAR
 ========================================================= */
 
 botoes.forEach(function(botao) {
@@ -124,10 +144,13 @@ botoes.forEach(function(botao) {
 
 	/* =====================================
 	   COMPUTADOR
-	   Passou o mouse por cima
+	   PASSOU O MOUSE
 	===================================== */
 
 	botao.addEventListener("mouseenter", function() {
+
+		clearTimeout(timer);
+
 
 		timer = setTimeout(function() {
 
@@ -144,7 +167,7 @@ botoes.forEach(function(botao) {
 
 			}
 
-		}, 700);
+		}, 150);
 
 	});
 
@@ -162,7 +185,7 @@ botoes.forEach(function(botao) {
 
 	/* =====================================
 	   CLIQUE
-	   Funciona no computador e no celular
+	   COMPUTADOR + CELULAR
 	===================================== */
 
 	botao.addEventListener("click", function(event) {
@@ -257,9 +280,7 @@ if (setaScroll && scrollProdutos) {
 	}
 
 
-	/* =====================================
-	   COMEÇOU A ARRASTAR
-	===================================== */
+	/* Primeiro movimento do carrossel */
 
 	scrollProdutos.addEventListener(
 		"scroll",
@@ -268,10 +289,7 @@ if (setaScroll && scrollProdutos) {
 	);
 
 
-	/* =====================================
-	   COMEÇOU O TOQUE
-	   Funciona no celular
-	===================================== */
+	/* Primeiro toque */
 
 	scrollProdutos.addEventListener(
 		"touchstart",
@@ -280,9 +298,7 @@ if (setaScroll && scrollProdutos) {
 	);
 
 
-	/* =====================================
-	   MOUSE COMEÇOU A ARRASTAR
-	===================================== */
+	/* Primeiro clique/arraste no computador */
 
 	scrollProdutos.addEventListener(
 		"mousedown",
